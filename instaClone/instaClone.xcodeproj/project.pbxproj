@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		784941822B340D02008F3048 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 784941812B340D02008F3048 /* RegisterViewController.swift */; };
 		78DB2FF92B33021D0006EE43 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78DB2FF82B33021D0006EE43 /* AppDelegate.swift */; };
 		78DB2FFB2B33021D0006EE43 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78DB2FFA2B33021D0006EE43 /* SceneDelegate.swift */; };
 		78DB30002B33021D0006EE43 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 78DB2FFE2B33021D0006EE43 /* Main.storyboard */; };
@@ -16,6 +17,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		784941812B340D02008F3048 /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		78DB2FF52B33021D0006EE43 /* instaClone.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = instaClone.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		78DB2FF82B33021D0006EE43 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		78DB2FFA2B33021D0006EE43 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -60,6 +62,7 @@
 				78DB2FFA2B33021D0006EE43 /* SceneDelegate.swift */,
 				78DB2FFE2B33021D0006EE43 /* Main.storyboard */,
 				78DB300C2B34026E0006EE43 /* LoginViewController.swift */,
+				784941812B340D02008F3048 /* RegisterViewController.swift */,
 				78DB30012B33021F0006EE43 /* Assets.xcassets */,
 				78DB30032B33021F0006EE43 /* LaunchScreen.storyboard */,
 				78DB30062B33021F0006EE43 /* Info.plist */,
@@ -141,6 +144,7 @@
 				78DB300D2B34026E0006EE43 /* LoginViewController.swift in Sources */,
 				78DB2FF92B33021D0006EE43 /* AppDelegate.swift in Sources */,
 				78DB2FFB2B33021D0006EE43 /* SceneDelegate.swift in Sources */,
+				784941822B340D02008F3048 /* RegisterViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
