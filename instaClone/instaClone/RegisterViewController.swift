@@ -21,7 +21,7 @@ class RegisterViewController: UIViewController {
     @IBOutlet weak var nameTextField: UITextField!
     
     @IBOutlet weak var nickNameTextField: UITextField!
-
+    
     @IBOutlet weak var passwordTextField: UITextField!
     
     var textFields: [UITextField] {
@@ -32,7 +32,7 @@ class RegisterViewController: UIViewController {
     //MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-
+         
     }
     
     
@@ -40,18 +40,35 @@ class RegisterViewController: UIViewController {
     //MARK: - Acitons
     @objc
     func textFieldEditingChange(_ sender: UITextField) {
+        let text =  sender.text ?? ""
         
-        
+        switch sender {
+        case emailTextField:
+            print("email")
+        case nameTextField:
+            print("name")
+        case nickNameTextField:
+            print("nickname")
+        case passwordTextField:
+            print("password")
+        default:
+            fatalError("Missing")
+            
+        }
     }
     
     
     
     //MARK: - Helpers
-
+    
     //연결 메소드
     private func setupTextField() {
         
-//        emailTextField.addTarget(self, action: #selector(textFieldEditingChange(_:)), for: .editingChanged)
+        textFields.forEach { tf in
+            tf.addTarget(self, action: #selector(textFieldEditingChange(_:)), for: .editingChanged)
+        }
+        
+        //        emailTextField.addTarget(self, action: #selector(textFieldEditingChange(_:)), for: .editingChanged)
     }
     
     
