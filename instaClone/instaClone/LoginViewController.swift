@@ -10,23 +10,18 @@ import UIKit
 
 class LoginViewController: UIViewController {
     
-    var eamil = String()
+    var email = String()
     var password = String()
+    var userInfo: UserInfo?
     
     @IBOutlet weak var registerButton: UIButton!
     
-    
-    
-    
+    @IBOutlet weak var loginButton: UIButton!
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupAttribute()
-        
-        
-        
-        
         
         
     }
@@ -35,15 +30,32 @@ class LoginViewController: UIViewController {
     //이메일에 뭔가 입력될때마다 이 함수가 호출됨
     @IBAction func emailTextFieldEditingChange(_ sender: UITextField) {
         let text = sender.text ?? ""
-        print(text)
+        
+        self.loginButton.backgroundColor = text.isValidEmail() ? .facebool : .disabledButton
+        
+        self.email = text
     }
     
     @IBAction func passwordTextFieldEditingChanged(_ sender: UITextField) {
+        let text = sender.text ?? ""
         
+        self.loginButton.backgroundColor = text.count > 2 ? .facebool : .disabledButton
+        
+        self.password = text
     }
     
     
     @IBAction func loginButtonDidTap(_ sender: UIButton) {
+        //회원가입정보를 전달받고, 그것과 textField값이 일치하면 로그인이 되어야 한다.
+        guard let userInfo = self.userInfo else { return }
+        
+        if userInfo.email == self.email
+            && userInfo.password == self.password {
+            let vc = storyboard?.instantiateViewController(withIdentifier: "TextVC") as! testViewController; self.present(vc, animated: true, completion: nil)
+        }
+        else {
+            
+        }
     }
     
     
@@ -56,6 +68,10 @@ class LoginViewController: UIViewController {
         
         //3. 화면전환
         self.navigationController?.pushViewController(registerViewControllor, animated: true)
+        
+        registerViewControllor.userInfo = { [weak self] (userInfo) in
+            self?.userInfo = userInfo
+        }
     }
     
     

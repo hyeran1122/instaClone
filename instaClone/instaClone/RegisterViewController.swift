@@ -14,6 +14,8 @@ class RegisterViewController: UIViewController {
     var nickname: String = ""
     var password: String = ""
     
+    //데이터를 구조체로 선언하고, 유저인포를 인풋해주면 보이드처리(아웃풋X)
+    var userInfo: ((UserInfo) -> Void)?
     
     var isValidEmail = false {
         didSet {
@@ -66,7 +68,7 @@ class RegisterViewController: UIViewController {
         super.viewDidLoad()
         setupTextField()
         setupAttribute()
-     
+        
         //bug fix
         self.navigationController?.interactivePopGestureRecognizer?.delegate = nil
     }
@@ -99,6 +101,8 @@ class RegisterViewController: UIViewController {
             fatalError("Missing")
             
         }
+        
+        validateUserInfo()
     }
     
     
@@ -108,30 +112,31 @@ class RegisterViewController: UIViewController {
         
     }
     
+    @IBAction func registerButtonDidTap(_ sender: UIButton) {
+        self.navigationController?.popViewController(animated: true)
+        let userInfo = UserInfo(email: self.email, name: self.name, nickname: self.nickname, password: self.password)
+        
+        self.userInfo?(userInfo)
+    }
     
     
     
     //MARK: - Helpers
     
     //연결 메소드
+   
     private func setupTextField() {
-        
         textFields.forEach { tf in
             tf.addTarget(self, action: #selector(textFieldEditingChange(_:)), for: .editingChanged)
         }
-        
-        //        emailTextField.addTarget(self, action: #selector(textFieldEditingChange(_:)), for: .editingChanged)
     }
     
+   
     
     private func validateUserInfo() {
-        
-        if isValidEmail
-            && isvalidName
-            && isValidNickName
-            && isValidPassword {
-            
+        if isValidEmail && isvalidName && isValidNickName && isValidPassword {
             UIView.animate(withDuration: 0.33) {
+                self.singupButton.isEnabled = true
                 self.singupButton.backgroundColor = UIColor.facebool
             }
         } else {
@@ -141,6 +146,9 @@ class RegisterViewController: UIViewController {
             }
         }
     }
+    
+    
+    
     
     private func setupAttribute() {
         
@@ -154,8 +162,8 @@ class RegisterViewController: UIViewController {
         let color2 = UIColor.facebool
         
         let attributes = self.poptoLoginButton.generateButtonAttribute(texts: text1, text2,
-                                                                     fonts: font1, font2,
-                                                                     colors: color1, color2)
+                                                                       fonts: font1, font2,
+                                                                       colors: color1, color2)
         
         self.poptoLoginButton.setAttributedTitle(attributes, for: .normal)
     }
@@ -165,14 +173,14 @@ class RegisterViewController: UIViewController {
 //정규 표현식
 extension String {
     func isValidPassword() -> Bool {
-        let regularExpression = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[$@$!%*?&])[A-Za-z\\d$@$!%*?&](8,]"
+        let regularExpression = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[$@$!%*?&])[A-Za-z\\d$@$!%*?&]{8,}$"
         let passwordValidation = NSPredicate.init(format: "SELF MATCHES %@", regularExpression)
         
         return passwordValidation.evaluate(with: self)
     }
     
     func isValidEmail() -> Bool {
-        let emailRegEx = "[A-Z0-9a-z._%+-]=@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
+        let emailRegEx = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
         let emailTest = NSPredicate(format:"SELF MATCHES %@", emailRegEx)
         return emailTest.evaluate(with: self)
     }
