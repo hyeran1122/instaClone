@@ -9,6 +9,12 @@ import UIKit
 
 class RegisterViewController: UIViewController {
     //MARK: - Ptoperties
+    var email: String = ""
+    var name: String = ""
+    var nickname: String = ""
+    var password: String = ""
+    
+    
     var isValidEmail = false {
         didSet {
             self.validateUserInfo()
@@ -47,6 +53,9 @@ class RegisterViewController: UIViewController {
     @IBOutlet weak var singupButton: UIButton!
     
     
+    @IBOutlet weak var poptoLoginButton: UIButton!
+    
+    
     var textFields: [UITextField] {
         [emailTextField, nameTextField, nickNameTextField, passwordTextField]
     }
@@ -55,7 +64,11 @@ class RegisterViewController: UIViewController {
     //MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        setupTextField()
+        setupAttribute()
+     
+        //bug fix
+        self.navigationController?.interactivePopGestureRecognizer?.delegate = nil
     }
     
     
@@ -68,21 +81,33 @@ class RegisterViewController: UIViewController {
         switch sender {
         case emailTextField:
             self.isValidEmail = text.isValidEmail()
+            self.email = text
             
         case nameTextField:
             self.isvalidName = text.count > 2
+            self.name = text
             
         case nickNameTextField:
             self.isValidNickName = text.count > 2
+            self.nickname = text
             
         case passwordTextField:
             self.isValidPassword = text.isValidPassword()
+            self.password = text
             
         default:
             fatalError("Missing")
             
         }
     }
+    
+    
+    //뒤로가기
+    @IBAction func backButtonDidTap(_ sender: UIBarButtonItem) {
+        self.navigationController?.popViewController(animated: true)
+        
+    }
+    
     
     
     
@@ -115,6 +140,24 @@ class RegisterViewController: UIViewController {
                 self.singupButton.backgroundColor = .disabledButton
             }
         }
+    }
+    
+    private func setupAttribute() {
+        
+        let text1 = "계정이 있으신가요?"
+        let text2 = "로그인"
+        
+        let font1 = UIFont.systemFont(ofSize: 13)
+        let font2 = UIFont.boldSystemFont(ofSize: 13)
+        
+        let color1 = UIColor.darkGray
+        let color2 = UIColor.facebool
+        
+        let attributes = self.poptoLoginButton.generateButtonAttribute(texts: text1, text2,
+                                                                     fonts: font1, font2,
+                                                                     colors: color1, color2)
+        
+        self.poptoLoginButton.setAttributedTitle(attributes, for: .normal)
     }
 }
 

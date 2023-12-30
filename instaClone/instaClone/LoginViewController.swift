@@ -13,6 +13,7 @@ class LoginViewController: UIViewController {
     var eamil = String()
     var password = String()
     
+    @IBOutlet weak var registerButton: UIButton!
     
     
     
@@ -21,7 +22,7 @@ class LoginViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        setupAttribute()
         
         
         
@@ -55,6 +56,25 @@ class LoginViewController: UIViewController {
         
         //3. 화면전환
         self.navigationController?.pushViewController(registerViewControllor, animated: true)
+    }
+    
+    
+    private func setupAttribute() {
+        
+        let text1 = "계정이 없으신가요?"
+        let text2 = "가입하기"
+        
+        let font1 = UIFont.systemFont(ofSize: 13)
+        let font2 = UIFont.boldSystemFont(ofSize: 13)
+        
+        let color1 = UIColor.darkGray
+        let color2 = UIColor.facebool
+        
+        let attributes = self.registerButton.generateButtonAttribute(texts: text1, text2,
+                                                                     fonts: font1, font2,
+                                                                     colors: color1, color2)
+        
+        self.registerButton.setAttributedTitle(attributes, for: .normal)
     }
     
 }
